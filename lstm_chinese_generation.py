@@ -17,7 +17,7 @@ from keras.models import load_model
 
 
 #read file get corpus and vacab
-f = codecs.open('poem.txt', 'r', 'utf-8')
+f = codecs.open('book1.txt', 'r', 'utf-8')
 text = f.read()
 print('corpus length:', len(text))
 chars = set(text)
@@ -28,7 +28,7 @@ char_indices = dict((c, i) for i, c in enumerate(chars))
 indices_char = dict((i, c) for i, c in enumerate(chars))
 
 # build training X and Y, using one-hot vectorization
-maxlen = 20
+maxlen = 25
 step = 10
 sentences = []
 next_chars = []
@@ -44,7 +44,7 @@ for i, sentence in enumerate(sentences):
     Y[i, char_indices[next_chars[i]]] = 1.
 
 # build or load model
-model_path = 'lstm_chinese_poem_model.h5'
+model_path = 'lstm_chinese_text_model.h5'
 
 def buildModel():
     print('Build model...')
