@@ -1,26 +1,27 @@
 '''
-    Script to generate text from Nietzsche's writings.
+    Script to generate text from Chinese Novels
+
+    With a char level corpus language model
 
 '''
-
 
 from __future__ import print_function
 import numpy as np
 import random, sys
+import codecs
 
 from keras.models import Sequential
 from keras.layers.core import Dense, Activation, Dropout
 from keras.layers.recurrent import LSTM
-from keras.utils.data_utils import get_file
 from keras.models import load_model
-import codecs
+
 
 #read file get corpus and vacab
-f = codecs.open('nietzsche.txt', 'r', 'utf-8')
-text = f.read().lower()
-print('corpus size:', len(text))
+f = codecs.open('book1.txt', 'r', 'utf-8')
+text = f.read()
+print('corpus length:', len(text))
 chars = set(text)
-print('total uinque chars:', len(chars))
+print('total chars:', len(chars))
 
 #build index dict
 char_indices = dict((c, i) for i, c in enumerate(chars))
@@ -41,9 +42,8 @@ for i, sentence in enumerate(sentences):
         X[i, t, char_indices[char]] = 1.
     Y[i, char_indices[next_chars[i]]] = 1.
 
-
 # build or load model
-model_path = 'lstm_text_model.h5'
+model_path = 'lstm_chinese_text_model.h5'
 
 def buildModel():
     print('Build model...')
@@ -69,11 +69,11 @@ model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
 # helper function to sample an index from a probability array
 def sample(a, diversity=0.75):
     if random.random() > diversity:
-        return np.argmax(a)   #most probable one
+        return np.argmax(a)
     while 1:
         i = random.randint(0, len(a)-1)
         if a[i] > random.random():
-            return i  #first random one
+            return i
 
 
 # train the model, output generated text
