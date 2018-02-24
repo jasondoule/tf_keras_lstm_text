@@ -29,7 +29,7 @@ indices_char = dict((i, c) for i, c in enumerate(chars))
 
 # build training X and Y, using one-hot vectorization
 maxlen = 20
-step = 10
+step = 15
 sentences = []
 next_chars = []
 for i in range(0, len(text) - maxlen, step):
