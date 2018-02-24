@@ -35,8 +35,9 @@ next_chars = []
 for i in range(0, len(text) - maxlen, step):
     sentences.append(text[i : i + maxlen])
     next_chars.append(text[i + maxlen])
-X = np.zeros((len(sentences), maxlen, len(chars)))
-Y = np.zeros((len(sentences), len(chars)))
+print("size:",len(sentences)*maxlen*len(chars))
+X = np.zeros((len(sentences), maxlen, len(chars)),dtype=np.bool)
+Y = np.zeros((len(sentences), len(chars)),dtype=np.bool)
 for i, sentence in enumerate(sentences):
     for t, char in enumerate(sentence):
         X[i, t, char_indices[char]] = 1.
