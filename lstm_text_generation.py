@@ -75,6 +75,10 @@ def sample(a, diversity=0.75):
         if a[i] > random.random():
             return i  #first random one
 
+#you could also use np.random.seed(0) to generate the next sample
+#p = np.array([0.1, 0.0, 0.7, 0.2])
+#index = np.random.choice([0, 1, 2, 3], p = p.ravel())
+
 
 # train the model, output generated text
 for iteration in range(1, 50):
