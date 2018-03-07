@@ -49,7 +49,7 @@ vocab = set(dataids)
 
 # build training X and Y, using one-hot vectorization
 maxlen = 20
-step = 5
+step = 30
 sentences = []
 next_words = []
 for i in range(0, len(dataids) - maxlen, step):
@@ -60,6 +60,7 @@ for i in range(0, len(dataids) - maxlen, step):
 #print('next_words',next_words)
 
 X = np.zeros((len(sentences), maxlen, len(vocab)),dtype=np.bool)
+
 Y = np.zeros((len(sentences), len(vocab)),dtype=np.bool)
 
 #print(X.shape)
